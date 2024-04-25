@@ -887,3 +887,21 @@ module DetectButtonHold
     end
 
 endmodule : DetectButtonHold
+
+module Register
+    #(parameter WIDTH = 8,
+      parameter RESET_VAL = {WIDTH{1'b0}})
+    (input  logic             clock, reset, en,
+     input  logic [WIDTH-1:0] D,
+     output logic [WIDTH-1:0] Q);
+
+    always_ff @(posedge clock) begin
+        if (reset) begin
+            Q <= RESET_VAL;
+        end
+        else if (en) begin
+            Q <= D;
+        end
+    end
+
+endmodule : Register
