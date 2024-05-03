@@ -48,7 +48,7 @@ Outputs
 8. row_L[3]
 9. row_L[4]
 
-This design requires a 10 MHz clock for accurate timing and visual effects (i.e. the LED display looks correct)
+This design requires a 10 MHz clock for accurate timing and visual effects (i.e. the LED display looks correct).
 
 ## Hardware Peripherals
 
@@ -58,7 +58,7 @@ This design requires a 5x17 LED display, an external decoder to process the col_
 
 You can test the design by following the general operation description in the "How it Works" section above.
 
-It is strongly preferred to have an LED display to which you can connect the design for testing.
+It is strongly preferred to have the hardware peripherals to which you can connect the design for testing.
 
 If you would like to try the Python testbench, make sure to add the following line to chip.sv (source in clockbox_test.py should be "chip.sv" too): `timescale 1ns/1ns.
 
