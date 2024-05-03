@@ -13,33 +13,29 @@ project:
 #
 # This info will be automatically collected and used to make a datasheet for the chip.
 documentation: 
-  author:       "PLACEHOLDER"      # Your name
+  author:       "Christopher Porco"      # Your name
   discord:      ""      # Your discord handle
-  title:        "PLACEHOLDER"      # Project title
-  description:  "PLACEHOLDER"      # Short description of what your project does
-  how_it_works: "PLACEHOLDER"      # Longer description of how the project works
-  how_to_test:  "PLACEHOLDER"      # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
-  external_hw:  "PLACEHOLDER"      # Describe any external hardware needed
-  language:     "verilog" # other examples include Verilog, Amaranth, VHDL, etc
-  doc_link:     ""      # URL to longer form documentation, eg the README.md in your repository
-  clock_hz:     1000       # Clock frequency in Hz (if required)
+  title:        "ClockBox"      # Project title
+  description:  "Clock and chronograph on 5x17 LED display"      # Short description of what your project does
+  how_it_works: "Mode toggles between modes, power controls the brightness of the LED display, and start/stop control the display depending on the mode"      # Longer description of how the project works
+  how_to_test:  "Try reseting the design, changing modes, setting the clock, start, stop, and reset the chronograph"      # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
+  external_hw:  "Oscillator, LED array, decoder"      # Describe any external hardware needed
+  language:     "SystemVerilog" # other examples include Verilog, Amaranth, VHDL, etc
+  doc_link:     "README.md"      # URL to longer form documentation, eg the README.md in your repository
+  clock_hz:     10000000       # Clock frequency in Hz (if required)
   picture:      ""      # relative path to a picture in your repository
   inputs:               # a description of what the inputs do
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
+    - Power
+    - Mode (Mode/set)
+    - Start (Start/next)
+    - Stop (Stop/reset/+)
   outputs:
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-
+    - col_sel[0]
+    - col_sel[1]
+    - col_sel[2]
+    - col_sel[3]
+    - row[0]
+    - row[1]
+    - row[2]
+    - row[3]
+    - row[4]

@@ -2,7 +2,7 @@
  * File: chip.sv
  * Authors: Christopher Porco
  *
- * Summary: Primary design file for my 18-224 tapeout project, ClockBox
+ * Summary: Primary design file for my 18-224 project, ClockBox
  *
  * Design Guidelines:
  * - Use "TODO" and no other variation for identifying things to do, possible bugs, etc.
@@ -26,6 +26,7 @@ parameter NUM_ROWS = 5;
 parameter NUM_DIGITS = 4;
 parameter DIGIT_BITS = 4;
 
+// Top module
 module my_chip (
     input logic [11:0] io_in, // Inputs to your chip
     output logic [11:0] io_out, // Outputs from your chip
@@ -470,7 +471,6 @@ module my_chip (
 
 endmodule
 
-
 // Takes in current time to be displayed and toggles output to drive the LEDs
 // Keeps track of power mode which controls LED brightness
 module LEDDriver
@@ -486,7 +486,7 @@ module LEDDriver
     ///// DEFINITIONS /////
     ///////////////////////
 
-    localparam NUM_CYC_COL = (CLOCK_RATE)/(REFRESH_RATE*NUM_COLS); // about 2048 (2046)
+    localparam NUM_CYC_COL = (CLOCK_RATE)/(REFRESH_RATE*NUM_COLS);
     localparam BITS_CYC_COL = $clog2(NUM_CYC_COL);
 
     enum logic [2:0] {POWER0, POWER1, POWER2, POWER3, POWER4, POWERMAX} power_mode, power_mode_next;
@@ -788,7 +788,7 @@ module ConvertDigit
 
 endmodule
 
-// For any button, can detect a press or a hold for >= 3 seconds
+// For any button, can detect a press or a hold for >= 2 seconds
 module DetectButtonHold
     (input  logic clock, reset,
      input  logic button,
@@ -798,12 +798,11 @@ module DetectButtonHold
     ///// DEFINITIONS /////
     ///////////////////////
 
-    localparam BUTTON_3SEC = 3*CLOCK_RATE;
-    localparam BUTTON_COUNT_SIZE = $clog2(BUTTON_3SEC); // 25 bits at 10 MHz
+    localparam BUTTON_2SEC = 2*CLOCK_RATE;
+    localparam BUTTON_COUNT_SIZE = $clog2(BUTTON_2SEC);
 
     enum logic [1:0] {BUTTON_WAIT, BUTTON_PRESSED, BUTTON_RELEASE} button_state, button_next_state;
 
-    logic button_held, button_pressed;
     logic button_latched, clear_buttonlatch, en_buttonlatch;
     logic en_buttoncount, reset_buttoncount, clear_buttoncount;
     logic [BUTTON_COUNT_SIZE-1:0] in_buttoncount, out_buttoncount;
@@ -821,7 +820,7 @@ module DetectButtonHold
         .D(in_buttoncount), .Q(out_buttoncount));
 
     // Latch to prevent counter overflow if button held longer than 3 sec
-    assign en_buttonlatch = (out_buttoncount >= BUTTON_3SEC);
+    assign en_buttonlatch = (out_buttoncount >= BUTTON_2SEC);
 
     always_ff @(posedge clock) begin
         if (reset | clear_buttonlatch) button_latched <= 1'b0;
