@@ -21,9 +21,9 @@ The following FSM describes the high-level behavior of the design:
 
 ![](img/fsm.png)
 
-General operation is as follows: upon reset, you enter clock mode. The starting number of seconds is 0. If mode is held for 2 seconds, you will enter the clock set mode and can set the current time. Pressing start selects the next digit, while stop adds to the currently selected digit. If the very middle LED illuminates, the time is PM. Press mode to exit back to the clock with seconds elasped equal to zero. This works like a normal clock, as you would expect.
+General operation is as follows: upon reset, you enter clock mode. The starting number of seconds is 0. If mode is asserted for 2 seconds, you will enter the clock set mode and can set the current time. Toggling start selects the next digit, while toggling stop adds to the currently selected digit. If the very middle LED illuminates, the time is PM. Toggle mode to exit back to the clock with seconds elasped equal to zero. This works like a normal clock (12 hour time), as you would expect.
 
-Press mode in the clock mode to enter chronograph mode. Press start to start the chronograph, which increments to 89 minutes and 59 seconds (90 minutes) before overflowing back to 0. Press stop at any time to stop the chronograph. Press and hold stop for 2 seconds to reset the chronograph back to 0. Pressing mode brings you back to clock.
+Toggle mode in the clock mode to enter chronograph mode. Toggle start to start the chronograph, which increments to 89 minutes and 59 seconds (90 minutes) before overflowing back to 0. Toggle stop at any time to stop the chronograph. Assert stop for 2 seconds to reset the chronograph back to 0. Toggling mode brings you back to clock.
 
 Both the clock and chronograph will continue incrementing if left running regardless of the current mode (except clock set for the clock) and regardless of the current LED brightness (including off).
 
